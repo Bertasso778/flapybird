@@ -1,54 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Flapybird.MainPage">
-<Grid>
-        
-          
-                
-                
-                
-                <Image
-                Source="Fundo.jpg"
-                HeightRequest="185"
-                Aspect="AspectFit" />
- 
- 
-                <Image
-                Source="carro.jpg"
-                HeightRequest="185"
-                Aspect="AspectFit" />
+             x:Class="Flapybird.MainPage"
+             Shell.NavBarIsVisible="False">
 
-                 <Image
-                Source="poste.jpg"
-                HeightRequest="185"
-                Aspect="AspectFit"/>
-                
-                
-                
-                 <Image
-                Source="poste.jpg"
-                HeightRequest="185"
-                Aspect="AspectFit" />
+    <Grid>
+        <Image Source="fundo.png"
+               Aspect="Fill"/>
 
-                 <Image
-                Source="Fundo.jpg"
-                HeightRequest="185"
-                Aspect="AspectFit"/>
+        <Image Source="carro.png"
+                     x:Name="imgPersonagem"
+                     HeightRequest="100"
+                     WidthRequest="150"
+                     HorizontalOptions="Start"/>
 
-                
+        <Image Source="poste_cima.png"
+        x:Name="posteCima"
+                     VerticalOptions="Start"
+                     HorizontalOptions="End"
+                     HeightRequest="350"/>
 
-                
-                </Frame>
+        <Image Source="poste_baixo.png"
+        x:Name="posteBaixo"
+                     VerticalOptions="End"
+                     HorizontalOptions="End"
+                     HeightRequest="350"/>
 
+        <Image Source="chao.png"
+                     VerticalOptions="End"
+                     HorizontalOptions="Fill"/>
 
-
-
-
-
-
-        
-       
-
+        <Frame IsVisible="true"
+                     x:Name="frameGameOver"
+                     HorizontalOptions="Fill"
+                     VerticalOptions="Fill"
+                     BackgroundColor="Transparent">
+                     <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnGameOverClicked"/>
+                     </Frame.GestureRecognizers>
+                     <!-- Tela de game over-->
+                     <Image Source="gameover.png"/>
+              </Frame>
+    </Grid>
 </ContentPage>
-</Grid>
