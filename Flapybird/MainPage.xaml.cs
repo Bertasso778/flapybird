@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
 	bool estaMorto = true;
 	double LarguraJanela = 0;
 	double AlturaJanela = 0;
-	int Velocidade =20;
+	int Velocidade = 20;
 
 	public MainPage()
 	{
@@ -26,9 +26,15 @@ public partial class MainPage : ContentPage
 		while (!estaMorto)
 		{
 			AplicaGravidade();
+			GerenciaCanos();
+			if (VerificaColisao())
+			{
+				estaMorto = true;
+				frameGameOver.IsVisible = true;
+				break;
+			}
 			await Task.Delay(tempoEntreFrames);
 		}
-
 	}
 
 	void OnGameOverClicked(object s, TappedEventArgs e)
@@ -36,7 +42,6 @@ public partial class MainPage : ContentPage
 		frameGameOver.IsVisible = false;
 		Inicializar();
 		Desenha();
-
 	}
 
 	void Inicializar()
@@ -44,24 +49,57 @@ public partial class MainPage : ContentPage
 		estaMorto = false;
 		imgPersonagem.TranslationY = 0;
 	}
-    protected override void OnSizeAllocated(double width, double height)
-    {
-        base.OnSizeAllocated(width, height);
-		
+
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+
 		LarguraJanela = width;
-		
-		AlturaJanela =height;
-    }
+		AlturaJanela = height;
+	}
 
 	void GerenciaCanos()
 	{
- 		posteCima.TranslationX -= Velocidade;
-	posteBaixo.TranslationX -= Velocidade;
-	if(posteBaixo.TranslationX < -LarguraJanela)
-	{
-		posteBaixo.TranslationX = 200;
-		posteBaixo.TranslationX = 200;
+		posteCima.TranslationX -= Velocidade;
+		posteBaixo.TranslationX -= Velocidade;
+		if (posteBaixo.TranslationX < -LarguraJanela)
+		{
+			posteBaixo.TranslationX = 200;
+			posteBaixo.TranslationX = 200;
+		}
 	}
+
+	bool VerificaColisao()
+	{
+		if (!estaMorto)
+		{
+			if (VerificaColisaoTeto() || verificaColisaoChao())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	bool VerificaColisaoTeto()
+	{
+		var minY = -AlturaJanela / 2;
+		if (imgPersonagem.TranslationY <= minY)
+			return true;
+		else
+			return false;
+	}
+
+	bool verificaColisaoChao()
+	{
+		var maxY = AlturaJanela / 2 - imgChao.HeightRequest;
+		if (imgPersonagem.TranslationY >= maxY)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
 

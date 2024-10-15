@@ -4,33 +4,36 @@
              x:Class="Flapybird.MainPage"
              Shell.NavBarIsVisible="False">
 
-    <Grid>
-        <Image Source="fundo.png"
-               Aspect="Fill"/>
+       <Grid>
+              <Image Source="fundo.png"
+                     Aspect="Fill"/>
 
-        <Image Source="carro.png"
+              <Image Source="carro.png"
                      x:Name="imgPersonagem"
                      HeightRequest="100"
                      WidthRequest="150"
                      HorizontalOptions="Start"/>
 
-        <Image Source="poste_cima.png"
-        x:Name="posteCima"
+              <Image Source="poste_cima.png"
+                     x:Name="posteCima"
                      VerticalOptions="Start"
                      HorizontalOptions="End"
                      HeightRequest="350"/>
 
-        <Image Source="poste_baixo.png"
-        x:Name="posteBaixo"
+              <Image Source="poste_baixo.png"
+                     x:Name="posteBaixo"
                      VerticalOptions="End"
                      HorizontalOptions="End"
                      HeightRequest="350"/>
 
-        <Image Source="chao.png"
+              <Image Source="chao.jpg"
+                     x:Name="imgChao"
+                     HeightRequest="100"
                      VerticalOptions="End"
-                     HorizontalOptions="Fill"/>
+                     HorizontalOptions="Fill"
+                     Aspect="Fill"/>
 
-        <Frame IsVisible="true"
+              <Frame IsVisible="true"
                      x:Name="frameGameOver"
                      HorizontalOptions="Fill"
                      VerticalOptions="Fill"
@@ -41,5 +44,5 @@
                      <!-- Tela de game over-->
                      <Image Source="gameover.png"/>
               </Frame>
-    </Grid>
+       </Grid>
 </ContentPage>
