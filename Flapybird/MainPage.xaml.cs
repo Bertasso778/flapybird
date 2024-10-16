@@ -10,6 +10,10 @@ public partial class MainPage : ContentPage
 	double LarguraJanela = 0;
 	double AlturaJanela = 0;
 	int Velocidade = 20;
+	const int ForçaPulo = 30;
+	const int MaxTempoPulando = 3; //FRAMES
+	bool EstaPulando = false;
+	int tempoPulando = 0;
 
 	public MainPage()
 	{
@@ -25,8 +29,12 @@ public partial class MainPage : ContentPage
 	{
 		while (!estaMorto)
 		{
-			AplicaGravidade();
 			GerenciaCanos();
+			if (EstaPulando)
+				AplicaPulo();
+			else
+				AplicaGravidade();
+
 			if (VerificaColisao())
 			{
 				estaMorto = true;
@@ -101,5 +109,21 @@ public partial class MainPage : ContentPage
 			return false;
 		}
 	}
+	void AplicaPulo()
+	{
+		imgPersonagem.TranslationY -= ForçaPulo;
+		tempoPulando++;
+		if (tempoPulando >= MaxTempoPulando)
+		{
+			EstaPulando = false;
+			tempoPulando = 0;
+
+		}
+	}
+	void OnGridClicked(object sender, TappedEventArgs a)
+	{
+		EstaPulando = true;
+	}
 }
+
 

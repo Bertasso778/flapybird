@@ -5,6 +5,9 @@
              Shell.NavBarIsVisible="False">
 
        <Grid>
+              <Grid.GestureRecognizers>
+                     <TapGestureRecognizer Tapped="OnGridClicked"/>
+              </Grid.GestureRecognizers>
               <Image Source="fundo.png"
                      Aspect="Fill"/>
 
