@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
 	const int MaxTempoPulando = 3; //FRAMES
 	bool EstaPulando = false;
 	int tempoPulando = 0;
-
+ const int aberturaMinima=200;
 	public MainPage()
 	{
 		InitializeComponent();
@@ -56,6 +56,8 @@ public partial class MainPage : ContentPage
 	{
 		estaMorto = false;
 		imgPersonagem.TranslationY = 0;
+		posteBaixo.TranslationX = 0;
+		posteCima.TranslationX = 0;
 	}
 
 	protected override void OnSizeAllocated(double width, double height)
@@ -72,8 +74,13 @@ public partial class MainPage : ContentPage
 		posteBaixo.TranslationX -= Velocidade;
 		if (posteBaixo.TranslationX < -LarguraJanela)
 		{
-			posteBaixo.TranslationX = 200;
-			posteBaixo.TranslationX = 200;
+			posteBaixo.TranslationX = 300;
+			posteBaixo.TranslationX = 300;
+
+			var alturaMax = -50;
+			var alturaMin = -posteBaixo.HeightRequest;
+			posteCima.TranslationY = Random.Shared.Next((int)alturaMin, (int)alturaMax);
+			posteBaixo.TranslationY = posteCima.TranslationY+aberturaMinima+posteCima.HeightRequest;
 		}
 	}
 
